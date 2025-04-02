@@ -1,0 +1,58 @@
+﻿@model TCSA_Movies.Arashi256.Models.Movie
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="card shadow border-4 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Add New Movie Details</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label custom-label"></label>
+                <input asp-for="Title" class="form-control custom-input" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReleaseDate" class="control-label custom-label"></label>
+                <input asp-for="ReleaseDate" class="form-control custom-input" maxlength="10" type="date"/>
+                <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Genre" class="control-label custom-label"></label>
+                <input asp-for="Genre" class="form-control custom-input" />
+                <span asp-validation-for="Genre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label custom-label"></label>
+                <input asp-for="Price" class="form-control custom-input" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rating" class="control-label custom-label"></label>
+                <input asp-for="Rating" class="form-control custom-input" />
+                <span asp-validation-for="Rating" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-6 mb-2 col-md-3 p-3">
+                    <a asp-controller="Movies" asp-action="Index" class="btn btn-outline-primary border form-control">
+                        Back to List
+                    </a>
+                </div>
+                <div class="col-6 mb-2 col-md-3 p-3">
+                    <button type="submit" class="btn btn-secondary form-control"><i class="bi bi-floppy"></i> Save New Movie</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

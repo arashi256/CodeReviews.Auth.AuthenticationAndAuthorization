@@ -1,0 +1,31 @@
+﻿@* /Areas/Identity/Pages/_Layout.cshtml *@
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-xl-9">
+            <h1 class="mb-3">Manage your account</h1>
+            <h2 class="h5 text-muted mb-4">Change your account settings</h2>
+
+            <div class="row">
+                <!-- Sidebar -->
+                <div class="col-md-3">
+                    <partial name="_ManageNav" />
+                </div>
+
+                <!-- Main content -->
+                <div class="col-md-9">
+                    <div class="card p-4 bg-dark border rounded-4 shadow">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

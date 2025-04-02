@@ -1,0 +1,104 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Movie App</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <style>
+        .navbar, .navbar * {
+            box-shadow: none !important;
+            border: none !important;
+            background-image: none !important;
+        }
+        .navbar .nav-link, .navbar .btn {
+            color: white !important;
+        }
+        .navbar .nav-link:hover, .navbar .btn:hover {
+            text-decoration: underline;
+        }
+        .navbar-brand img {
+            height: 50px;
+            width: auto;
+            pointer-events: none;
+        }
+        .navbar-brand span {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3 border-bottom">
+            <div class="container">
+                <div class="row w-100 align-items-end">
+                    <div class="col d-flex align-items-center">
+                        <!-- Logo + Title -->
+                        <a class="navbar-brand d-flex align-items-center" asp-controller="Movies" asp-action="Index">
+                            <img src="/img/movies-icon-small.png" alt="Movie App Logo" />
+                            <span class="ms-2">Movies MVC Webapp</span>
+                        </a>
+                    </div>
+                    <div class="col-auto">
+                        <ul class="navbar-nav d-flex align-items-center">
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <li class="nav-item me-3">
+                                    <a class="nav-link fw-bold text-light d-flex align-items-center gap-2" asp-area="Identity" asp-page="/Account/Manage/Index" style="text-decoration: none;">
+                                        <i class="bi bi-person-circle"></i> Profile
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <form asp-area="Identity" asp-page="/Account/Logout" method="post" class="d-inline">
+                                        <button type="submit" class="nav-link btn btn-link fw-bold text-light p-0" style="text-decoration: none;">Logout</button>
+                                    </form>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item me-3">
+                                    <a class="nav-link fw-bold text-light" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link fw-bold text-light" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            <partial name="_Notifications" />
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="border-top footer text-muted text-center">
+        <div class="container">
+            2024 - Movies MVC App, The C# Academy - Arashi256
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var successMessage = '@TempData["SuccessMessage"]';
+            if (successMessage) {
+                toastr.success(successMessage);
+            }
+        });
+    </script>
+</body>
+</html>
